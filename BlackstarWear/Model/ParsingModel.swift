@@ -18,6 +18,7 @@ class Categories: Codable {
     var new: Info?
     var marketplace: Info?
     var preorder: Info?
+    var seasonalBoom: Info?
     
      enum CodingKeys:String, CodingKey, CaseIterable {
         case lastSize = "263"
@@ -30,6 +31,7 @@ class Categories: Codable {
         case new = "165"
         case marketplace = "233"
         case preorder = "0"
+        case seasonalBoom = "347"
     }
 }
 

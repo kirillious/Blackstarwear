@@ -13,6 +13,7 @@ class TabBarView: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         delegate = self
+        view.backgroundColor = .white
     }
     
     

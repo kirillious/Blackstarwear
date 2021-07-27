@@ -51,16 +51,37 @@ public func stringToImage(address: String) -> UIImage? {
 
 import RealmSwift
 
-extension Results {
+//extension Results {
+//
+//    func toArray() -> [Element] {
+//        return self.map{$0}
+//    }
+//}
+//
+//extension RealmSwift.List {
+//
+//    func toArray() -> [Element] {
+//        return self.map{$0}
+//    }
+//}
 
-    func toArray() -> [Element] {
-        return self.map{$0}
+fileprivate var aView: UIView?
+
+extension UIViewController {
+    
+    func showSpinner() {
+        aView = UIView(frame: self.view.bounds)
+        aView!.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        let ai = UIActivityIndicatorView(style: .large)
+        ai.color = .black
+        ai.center = view.center
+        ai.startAnimating()
+        aView!.addSubview(ai)
+        self.view.addSubview(aView!)
     }
-}
-
-extension RealmSwift.List {
-
-    func toArray() -> [Element] {
-        return self.map{$0}
+    
+    func removeSpiner()  {
+        aView?.removeFromSuperview()
+        aView = nil
     }
 }

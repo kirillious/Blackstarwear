@@ -38,10 +38,9 @@ class SubCategoriesTableViewCell: UITableViewCell {
     func setContentViewElem() {
         NSLayoutConstraint.activate([categoryName.centerXAnchor.constraint(equalTo: contentView.centerXAnchor), categoryName.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             categoryImage.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5),
-            categoryImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            categoryImage.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            categoryImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             categoryImage.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2),
-            categoryImage.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.2),
+            categoryImage.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.9),
             
         ])
     

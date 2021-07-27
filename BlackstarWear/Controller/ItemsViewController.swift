@@ -28,14 +28,27 @@ class ItemsViewController: UIViewController {
         view.addSubview(collection)
         settingCollectionConsts(collectionView: collection)
         
+        DispatchQueue.main.async {
+            self.showSpinner()
+        }
+        
         let itemsViewModel = ItemsViewModel()
-        itemsViewModel.modelingDataForItemsVC(id: id!) { items, rawItems in
-            self.itemsList = items
-            self.rawItemsList = rawItems
-            collection.reloadData()
+        
+        DispatchQueue.global(qos: .userInitiated).async { [self] in
+            print("This is run on a background queue")
+            itemsViewModel.modelingDataForItemsVC(id: id!) { items, rawItems in
+                
+                DispatchQueue.main.async {
+                    self.itemsList = items
+                    self.rawItemsList = rawItems
+                    collection.reloadData()
+                    self.removeSpiner()
+                }
+            }
         }
         
     }
+        
     
     
     func settingCollectionConsts(collectionView: UICollectionView) {

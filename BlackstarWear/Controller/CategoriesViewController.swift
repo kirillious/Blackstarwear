@@ -14,19 +14,32 @@ class CategoriesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        showSpinner()
         self.title = "Catalog"
         tableView.register(CategoriesTableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
         tableView.delegate = self
-        view.addSubview(tableView)
-        settingTableConsts()
+        tableView.tableFooterView = UIView()
+        DispatchQueue.main.async {
+            self.showSpinner()
+        }
         
+        DispatchQueue.global(qos: .userInitiated).async {
+            print("This is run on a background queue")
+            self.categoryViewModel.modelingDataForViewCategories { [self] (categories) in
+                
+                DispatchQueue.main.async {
 
-        
-        categoryViewModel.modelingDataForViewCategories { (categories) in
-            self.categoriesList = categories
-            self.tableView.reloadData()
-        }        
+                    self.categoriesList = categories
+                    
+                    self.tableView.reloadData()
+                    self.removeSpiner()
+                }
+            }
+        }
+
+        view.addSubview(tableView)
+        settingConsts()
     }
     
     
@@ -36,13 +49,13 @@ class CategoriesViewController: UIViewController {
         return table
     }()
     
-    func settingTableConsts() {
+    
+    func settingConsts() {
         NSLayoutConstraint.activate([tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor), tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
     }
-    
 }
 
 
@@ -55,20 +68,38 @@ extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CategoriesTableViewCell
-        cell.categoryName.text = categoriesList[indexPath.row]?.name
-        cell.categoryImage.image = categoriesList[indexPath.row]?.image
+
+            cell.categoryName.text = categoriesList[indexPath.row]?.name
+            cell.categoryImage.image = categoriesList[indexPath.row]?.image
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         transitionToSubCategoriesVC(indexPath: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func transitionToSubCategoriesVC(indexPath: Int) {
         let subCategVC = SubCategoriesViewController()
-        subCategVC.itemsList = categoryViewModel.subCategoryList[indexPath]
+        print(categoriesList[indexPath]!.subcategories.count)
+        var trueItem: [SubCategories] = []
+        trueItem = categoriesList[indexPath]!.subcategories
+        
+        var i = 0
+        while i < trueItem.count {
+            if trueItem[i].iconImage != nil {
+                subCategVC.itemsList.append(trueItem[i])
+            }
+            i += 1
+        }
+        
         subCategVC.title = categoriesList[indexPath]?.name
         navigationController?.pushViewController(subCategVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.height * 0.15
     }
 
 }

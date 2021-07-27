@@ -20,15 +20,14 @@
 		ED3A89D0268E0184005E9314 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3A89CF268E0184005E9314 /* CartTableViewCell.swift */; };
 		ED45B56826932B850043AB06 /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45B56726932B850043AB06 /* Persistance.swift */; };
 		ED5385F02690712200CF9B7C /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5385EF2690712200CF9B7C /* CartModel.swift */; };
-		ED6B281B267D0CE3009DD180 /* ClothView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6B281A267D0CE3009DD180 /* ClothView.swift */; };
 		ED86D2E0267CC4630010243B /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED86D2DF267CC4630010243B /* Operators.swift */; };
 		ED981999266FA3DC00D789A7 /* SubCategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED981998266FA3DC00D789A7 /* SubCategoriesViewController.swift */; };
 		ED98199D266FB0EF00D789A7 /* SubCategoriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED98199C266FB0EF00D789A7 /* SubCategoriesTableViewCell.swift */; };
 		ED9819A2266FC79F00D789A7 /* CategoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9819A1266FC79F00D789A7 /* CategoryModel.swift */; };
 		ED9DEA282688C639005B0307 /* SizeDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9DEA272688C639005B0307 /* SizeDescriptionTableViewCell.swift */; };
+		EDAF6E5226ACBD9000A3CB07 /* TestClothView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAF6E5126ACBD9000A3CB07 /* TestClothView.swift */; };
 		EDC2AB962661416B004841DF /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2AB952661416B004841DF /* TabBarView.swift */; };
 		EDC2AB9926614211004841DF /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC2AB9826614211004841DF /* CartViewController.swift */; };
-		EDC2AB9E26615985004841DF /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDC2AB9D26615985004841DF /* View.xib */; };
 		EDDA564726778A9C002B43BC /* ItemsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA564626778A9C002B43BC /* ItemsViewController.swift */; };
 		EDDA564A26778C26002B43BC /* ItemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA564926778C26002B43BC /* ItemsCollectionViewCell.swift */; };
 		EDDA564D2677CE85002B43BC /* ItemsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDA564C2677CE85002B43BC /* ItemsModel.swift */; };
@@ -55,15 +54,14 @@
 		ED3A89CF268E0184005E9314 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		ED45B56726932B850043AB06 /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
 		ED5385EF2690712200CF9B7C /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
-		ED6B281A267D0CE3009DD180 /* ClothView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothView.swift; sourceTree = "<group>"; };
 		ED86D2DF267CC4630010243B /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		ED981998266FA3DC00D789A7 /* SubCategoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoriesViewController.swift; sourceTree = "<group>"; };
 		ED98199C266FB0EF00D789A7 /* SubCategoriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubCategoriesTableViewCell.swift; sourceTree = "<group>"; };
 		ED9819A1266FC79F00D789A7 /* CategoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryModel.swift; sourceTree = "<group>"; };
 		ED9DEA272688C639005B0307 /* SizeDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizeDescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		EDAF6E5126ACBD9000A3CB07 /* TestClothView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestClothView.swift; sourceTree = "<group>"; };
 		EDC2AB952661416B004841DF /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		EDC2AB9826614211004841DF /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
-		EDC2AB9D26615985004841DF /* View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View.xib; sourceTree = "<group>"; };
 		EDDA564626778A9C002B43BC /* ItemsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsViewController.swift; sourceTree = "<group>"; };
 		EDDA564926778C26002B43BC /* ItemsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionViewCell.swift; sourceTree = "<group>"; };
 		EDDA564C2677CE85002B43BC /* ItemsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsModel.swift; sourceTree = "<group>"; };
@@ -140,9 +138,9 @@
 				ED1289DC266001C40082BFF4 /* CategoriesTableViewCell.swift */,
 				ED98199C266FB0EF00D789A7 /* SubCategoriesTableViewCell.swift */,
 				EDDA564926778C26002B43BC /* ItemsCollectionViewCell.swift */,
-				ED6B281A267D0CE3009DD180 /* ClothView.swift */,
 				ED9DEA272688C639005B0307 /* SizeDescriptionTableViewCell.swift */,
 				ED3A89CF268E0184005E9314 /* CartTableViewCell.swift */,
+				EDAF6E5126ACBD9000A3CB07 /* TestClothView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,7 +187,6 @@
 				ED257073265D85870054C2E6 /* Assets.xcassets */,
 				ED257075265D85870054C2E6 /* LaunchScreen.storyboard */,
 				ED257078265D85870054C2E6 /* Info.plist */,
-				EDC2AB9D26615985004841DF /* View.xib */,
 			);
 			path = BlackstarWear;
 			sourceTree = "<group>";
@@ -254,7 +251,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED257077265D85870054C2E6 /* LaunchScreen.storyboard in Resources */,
-				EDC2AB9E26615985004841DF /* View.xib in Resources */,
 				ED257074265D85870054C2E6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,10 +314,10 @@
 				ED86D2E0267CC4630010243B /* Operators.swift in Sources */,
 				ED9DEA282688C639005B0307 /* SizeDescriptionTableViewCell.swift in Sources */,
 				ED25706B265D85850054C2E6 /* AppDelegate.swift in Sources */,
+				EDAF6E5226ACBD9000A3CB07 /* TestClothView.swift in Sources */,
 				EDE512492687206B0012B639 /* SizeDescriptionViewController.swift in Sources */,
 				ED1289DD266001C40082BFF4 /* CategoriesTableViewCell.swift in Sources */,
 				ED25706D265D85850054C2E6 /* SceneDelegate.swift in Sources */,
-				ED6B281B267D0CE3009DD180 /* ClothView.swift in Sources */,
 				ED98199D266FB0EF00D789A7 /* SubCategoriesTableViewCell.swift in Sources */,
 				ED3A89D0268E0184005E9314 /* CartTableViewCell.swift in Sources */,
 				EDF00DAA267BD014008BBB2E /* ClothViewController.swift in Sources */,

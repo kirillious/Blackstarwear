@@ -20,6 +20,8 @@ class SizeDescriptionViewController: UIViewController {
         tableView.delegate = self
         view.addSubview(tableView)
         settingTableConsts()
+        tableView.tableFooterView = UIView()
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,10 +64,7 @@ class SizeDescriptionViewController: UIViewController {
         let date = Date()
         Persistance.shared.savingImages(jpegRepresentation! as NSData, fileName: date)
 
-        sender.backgroundColor = UIColor(red: 0.35, green: 0.0, blue: 0.0, alpha: 1.0)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            sender.backgroundColor = .red
-        }
+        dismiss(animated: true, completion: nil)
     }
     
     
@@ -98,6 +97,10 @@ extension SizeDescriptionViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
        return "Выберите размер"
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.height * 0.1
     }
 
 

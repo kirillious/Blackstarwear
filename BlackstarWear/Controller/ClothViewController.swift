@@ -11,8 +11,7 @@ class ClothViewController: UIViewController {
     
     var clothFeatures: RawItemsModel?
     static var shared = ClothViewController()
-//    var item = ClothView(frame: UIScreen.main.bounds)
-    let clothView = ClothView()
+    let testClothView = TestClothView()
 
 
     override func viewDidLoad() {
@@ -20,9 +19,11 @@ class ClothViewController: UIViewController {
     }
     
     override func loadView() {
-        self.view = clothView.creatingView(clothData: clothFeatures, heightOfController: (self.navigationController?.navigationBar.frame.height)!)
-        clothView.scrollView.delegate = self
-
+        let tabBarHeight = self.navigationController?.tabBarController?.tabBar.frame.origin.y
+        let navigationHeight = self.navigationController?.navigationBar.frame.maxY
+        let tabBarLow = self.navigationController?.tabBarController?.tabBar.frame.height
+        self.view = testClothView.creatingView(clothData: clothFeatures,tabBarHeight: (tabBarController?.tabBar.frame.origin.y)! - (tabBarController?.tabBar.frame.height)!, navigationHeight: navigationHeight!, tabBarLow: tabBarLow!)
+        testClothView.imageScrollView.delegate = self
     }
     
     @objc func orderButtonPressed() {
@@ -37,7 +38,8 @@ class ClothViewController: UIViewController {
 extension ClothViewController: UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        clothView.pageControl.currentPage = Int(round(clothView.scrollView.contentOffset.x / clothView.scrollView.frame.size.width))
+        testClothView.pageControl.currentPage = Int(round(testClothView.imageScrollView.contentOffset.x / testClothView.imageScrollView.frame.size.width))
+        
     }
     
 }

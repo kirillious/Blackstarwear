@@ -20,6 +20,7 @@ class SubCategoriesViewController: UIViewController {
         tableView.delegate = self
         view.addSubview(tableView)
         settingTableConsts()
+        tableView.tableFooterView = UIView()
     }
     
     let tableView: UITableView = {
@@ -46,19 +47,25 @@ extension SubCategoriesViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SubCategoriesTableViewCell
-        cell.categoryName.text = itemsList[indexPath.row].name
-        cell.categoryImage.image = itemsList[indexPath.row].iconImage
+            cell.categoryName.text = itemsList[indexPath.row].name
+            cell.categoryImage.image = itemsList[indexPath.row].iconImage
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         transitionToItemsVC(indexPath: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func transitionToItemsVC(indexPath: Int) {
         let itemVC = ItemsViewController()
         itemVC.id = itemsList[indexPath].id
         navigationController?.pushViewController(itemVC, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return view.frame.height * 0.15
     }
     
 }
