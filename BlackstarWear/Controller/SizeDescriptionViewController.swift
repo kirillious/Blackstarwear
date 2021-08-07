@@ -52,17 +52,19 @@ class SizeDescriptionViewController: UIViewController {
     
     @objc func buttonPressed(sender: UIButton) {
         
-        let cartModel1 = PersistantItems()
-        cartModel1.price = String((sizeData?.price?.dropLast(3))!)
-        cartModel1.colorName = (sizeData?.colorName)!
-        cartModel1.productName = (sizeData?.name)!
-        cartModel1.size = (sizeData?.offers[sender.tag]?.size)!
-        let image = stringToImage(address: (sizeData?.mainImage)!)
-        let jpegRepresentation = image?.jpegData(compressionQuality: 1.0)
-        Persistance.shared.savingProduct(product: cartModel1)
-        
-        let date = Date()
-        Persistance.shared.savingImages(jpegRepresentation! as NSData, fileName: date)
+        if let price = sizeData?.price, let colorName = sizeData?.colorName, let productName = sizeData?.name, let size = sizeData?.offers[sender.tag]?.size, let imageString = sizeData?.mainImage {
+            
+            let cartModel1 = PersistantItems()
+            cartModel1.price = String(price.dropLast(3))
+            cartModel1.colorName = colorName
+            cartModel1.productName = productName
+            cartModel1.size = size
+            guard let image = stringToImage(address: imageString) else {return}
+            guard let jpegRepresentation = image.jpegData(compressionQuality: 1.0) else {return}
+            let date = Date()
+            Persistance.shared.savingImages(jpegRepresentation as NSData, fileName: date)
+            Persistance.shared.savingProduct(product: cartModel1)
+        }
 
         dismiss(animated: true, completion: nil)
     }

@@ -9,8 +9,6 @@ import UIKit
 
 class TestClothView: UIView {
     
-    var cloth: RawItemsModel?
-    
 
     
     var widthOfScrollView = UIScreen.main.bounds.width
@@ -19,21 +17,32 @@ class TestClothView: UIView {
     var scrollView = UIScrollView()
     var pageControl = UIPageControl()
     
-    let imageScrollView: UIScrollView = {
-        let scroll = UIScrollView()
-        scroll.translatesAutoresizingMaskIntoConstraints = false
-        scroll.alwaysBounceHorizontal = true
-        scroll.isPagingEnabled = true
-        scroll.showsHorizontalScrollIndicator = false
-        return scroll
+
+    
+    lazy var imageCollection: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collection.isScrollEnabled = true
+        collection.register(ClothCellCollectionViewCell.self, forCellWithReuseIdentifier: ClothCellCollectionViewCell.identifier)
+        collection.showsHorizontalScrollIndicator = false
+        collection.isPagingEnabled = true
+        collection.backgroundColor = .white
+        collection.translatesAutoresizingMaskIntoConstraints = false
+        return collection
     }()
     
+    
 
-    func creatingView(clothData: RawItemsModel?, tabBarHeight: CGFloat, navigationHeight:CGFloat, tabBarLow: CGFloat) -> UIView {
+    func creatingView(clothData: RawItemsModel?, tabBarHeight: CGFloat, navigationHeight:CGFloat, tabBarLow: CGFloat, vc: UIViewController) -> UIView {
 
-        let numbersOfImages: Int = (clothData?.productImages.count)!
+        let numbersOfImages: Int = clothData?.productImages.count ?? 0
         let clothView = UIView()
         clothView.backgroundColor = .white
+        imageCollection.dataSource = vc as? UICollectionViewDataSource
+        imageCollection.delegate = vc as? UICollectionViewDelegate
+        
+        clothView.addSubview(imageCollection)
         
         
         let mainScrollView: UIScrollView = {
@@ -44,6 +53,8 @@ class TestClothView: UIView {
             scroll.alwaysBounceVertical = true
             return scroll
         }()
+        
+        
         
         
         clothView.addSubview(mainScrollView)
@@ -58,28 +69,15 @@ class TestClothView: UIView {
         mainScrollView.addSubview(contentView)
         
 
+            
+        clothView.addSubview(imageCollection)
         
-        contentView.addSubview(imageScrollView)
+        NSLayoutConstraint.activate([imageCollection.topAnchor.constraint(equalTo: contentView.topAnchor), imageCollection.leftAnchor.constraint(equalTo: contentView.leftAnchor), imageCollection.rightAnchor.constraint(equalTo: contentView.rightAnchor), imageCollection.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.4)])
         
-        NSLayoutConstraint.activate([imageScrollView.topAnchor.constraint(equalTo: contentView.topAnchor), imageScrollView.leftAnchor.constraint(equalTo: contentView.leftAnchor), imageScrollView.rightAnchor.constraint(equalTo: contentView.rightAnchor), imageScrollView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.4)])
+
         
         clothView.layoutIfNeeded()
 
-        
-        var i = 0
-        var viewForImages = UIView(frame: .zero)
-        viewForImages = UIView(frame: CGRect(x: imageScrollView.frame.origin.x, y: imageScrollView.frame.origin.y, width: imageScrollView.frame.width * CGFloat(numbersOfImages), height: imageScrollView.frame.height))
-        viewForImages.backgroundColor = .green
-        for image in clothData!.productImages {
-            
-            let picture = UIImageView(frame: CGRect(x: imageScrollView.frame.origin.x + (imageScrollView.frame.width * CGFloat(i)), y: 0, width: imageScrollView.frame.width, height: imageScrollView.frame.height))
-            picture.image = stringToImage(address: (image?.imageURL)!)
-            viewForImages.addSubview(picture)
-            i += 1
-        }
-        imageScrollView.addSubview(viewForImages)
-        
-        imageScrollView.contentSize = CGSize(width: imageScrollView.frame.width * CGFloat(numbersOfImages), height: imageScrollView.frame.height)
         
   
         pageControl.numberOfPages = numbersOfImages
@@ -90,7 +88,7 @@ class TestClothView: UIView {
         pageControl.translatesAutoresizingMaskIntoConstraints = false
         clothView.addSubview(pageControl)
             
-        NSLayoutConstraint.activate([pageControl.centerXAnchor.constraint(equalTo: imageScrollView.centerXAnchor), pageControl.bottomAnchor.constraint(equalTo: imageScrollView.bottomAnchor), pageControl.widthAnchor.constraint(equalTo: imageScrollView.widthAnchor, multiplier: 0.4), pageControl.heightAnchor.constraint(equalTo: imageScrollView.heightAnchor, multiplier: 0.2)])
+        NSLayoutConstraint.activate([pageControl.centerXAnchor.constraint(equalTo: imageCollection.centerXAnchor), pageControl.bottomAnchor.constraint(equalTo: imageCollection.bottomAnchor), pageControl.widthAnchor.constraint(equalTo: imageCollection.widthAnchor, multiplier: 0.4), pageControl.heightAnchor.constraint(equalTo: imageCollection.heightAnchor, multiplier: 0.2)])
         
         let priceLabel: UILabel = {
             let label = UILabel()
@@ -139,9 +137,9 @@ class TestClothView: UIView {
         contentView.addSubview(descriptionLabel)
         clothView.addSubview(orderButton)
         
-        NSLayoutConstraint.activate([priceLabel.topAnchor.constraint(equalTo: imageScrollView.bottomAnchor, constant: 10), priceLabel.leftAnchor.constraint(equalTo: clothView.leftAnchor, constant: 5), priceLabel.heightAnchor.constraint(equalToConstant: 20)])
+        NSLayoutConstraint.activate([priceLabel.topAnchor.constraint(equalTo: imageCollection.bottomAnchor, constant: 10), priceLabel.leftAnchor.constraint(equalTo: clothView.leftAnchor, constant: 5), priceLabel.heightAnchor.constraint(equalToConstant: 20)])
         
-        NSLayoutConstraint.activate([colorLabel.topAnchor.constraint(equalTo: imageScrollView.bottomAnchor, constant: 10), colorLabel.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor), colorLabel.rightAnchor.constraint(equalTo: clothView.rightAnchor, constant: -5)])
+        NSLayoutConstraint.activate([colorLabel.topAnchor.constraint(equalTo: imageCollection.bottomAnchor, constant: 10), colorLabel.bottomAnchor.constraint(equalTo: priceLabel.bottomAnchor), colorLabel.rightAnchor.constraint(equalTo: clothView.rightAnchor, constant: -5)])
         
         
         NSLayoutConstraint.activate([descriptionLabel.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 1), descriptionLabel.topAnchor.constraint(equalTo: colorLabel.bottomAnchor, constant: 10)])
@@ -154,10 +152,7 @@ class TestClothView: UIView {
         NSLayoutConstraint.activate([orderButton.bottomAnchor.constraint(equalTo: clothView.bottomAnchor, constant: -tabBarLow), orderButton.leftAnchor.constraint(equalTo: contentView.leftAnchor), orderButton.rightAnchor.constraint(equalTo: contentView.rightAnchor), orderButton.heightAnchor.constraint(equalTo: mainScrollView.heightAnchor, multiplier: 0.08)])
 
         
-        
         return clothView
     }
     
-
-
 }

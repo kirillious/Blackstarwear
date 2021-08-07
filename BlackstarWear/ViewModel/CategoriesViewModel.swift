@@ -17,11 +17,7 @@ class CategoriesViewModel {
         
         APICall.shared.fetchGenericData(urlString: "https://blackstarshop.ru/index.php?route=api/v1/categories") { [self] (categories: Categories) in
             
-            if categories.collection != nil {
-                print("its not nil")
-            } else {
-                print("IT is a fcking nil")
-            }
+
             
             // Тут я хотел сохранить порядок категорий, который предоставляет сервер, поэтому так плохо
             rawCategoryList.append(categories.collection)
@@ -59,7 +55,7 @@ class CategoriesViewModel {
                         eachSubCategorItem.id = x.id
                         eachSubCategorItem.name = x.name
                         guard let imageUrl = URL(string: "https://blackstarwear.ru/" + x.iconImage!) else {return}
-                        let imageData = try! Data(contentsOf: imageUrl)
+                        guard let imageData = try? Data(contentsOf: imageUrl) else {return}
                         let image = UIImage(data: imageData)
                         eachSubCategorItem.iconImage = image
                         subCategorList.append(eachSubCategorItem)

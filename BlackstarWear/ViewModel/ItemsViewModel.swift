@@ -21,21 +21,26 @@ class ItemsViewModel {
                 if let itemPrice: String = item.price {
                     itemModel.price = String(itemPrice.dropLast(2)) + " руб."
                 }
-                let imageUrl = URL(string: "https://blackstarwear.ru/" + item.mainImage!)
-                    do {
-                        let imageData = try Data(contentsOf: imageUrl!)
-                        let image = UIImage(data: imageData)
-                        itemModel.mainImage = image
-                        itemsList.append(itemModel)
-                    } catch {
-                        print("Error while parsing")
-                    }
-            DispatchQueue.main.async {
-                completion(itemsList,array)
-            }
-
+                
+                if let imageLink = item.mainImage {
+                
+                let imageUrl = URL(string: "https://blackstarwear.ru/" + imageLink)
+                do {
+                    let imageData = try Data(contentsOf: imageUrl!)
+                    let image = UIImage(data: imageData)
+                    itemModel.mainImage = image
+                    itemsList.append(itemModel)
+                } catch {
+                    print("Error while parsing")
+                }
+                DispatchQueue.main.async {
+                    completion(itemsList,array)
+                }
+                    
+                }
+                
             }
         }
     }
-
+    
 }

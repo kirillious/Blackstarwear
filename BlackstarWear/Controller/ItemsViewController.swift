@@ -74,7 +74,10 @@ extension ItemsViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemsCollectionViewCell.identifier, for: indexPath) as! ItemsCollectionViewCell
-        cell.itemImage.image = itemsList[indexPath.row].mainImage!
+        
+        if let mainImage = itemsList[indexPath.row].mainImage {
+            cell.itemImage.image = mainImage
+        }
         cell.priceLabel.text = itemsList[indexPath.row].price
         cell.nameLabel.text = itemsList[indexPath.row].name
         return cell

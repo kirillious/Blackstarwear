@@ -29,9 +29,7 @@ class CategoriesViewController: UIViewController {
             self.categoryViewModel.modelingDataForViewCategories { [self] (categories) in
                 
                 DispatchQueue.main.async {
-
                     self.categoriesList = categories
-                    
                     self.tableView.reloadData()
                     self.removeSpiner()
                 }
@@ -82,16 +80,17 @@ extension CategoriesViewController: UITableViewDelegate, UITableViewDataSource {
     
     func transitionToSubCategoriesVC(indexPath: Int) {
         let subCategVC = SubCategoriesViewController()
-        print(categoriesList[indexPath]!.subcategories.count)
         var trueItem: [SubCategories] = []
-        trueItem = categoriesList[indexPath]!.subcategories
         
-        var i = 0
-        while i < trueItem.count {
-            if trueItem[i].iconImage != nil {
-                subCategVC.itemsList.append(trueItem[i])
+        if let trueItem = categoriesList[indexPath]?.subcategories {
+            
+            var i = 0
+            while i < trueItem.count {
+                if trueItem[i].iconImage != nil {
+                    subCategVC.itemsList.append(trueItem[i])
+                }
+                i += 1
             }
-            i += 1
         }
         
         subCategVC.title = categoriesList[indexPath]?.name
